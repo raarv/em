@@ -1,0 +1,108 @@
+% ==============================================================================
+\documentclass[10pt]{report}
+% ==============================================================================
+
+%%% ========================================================================
+\usepackage{amsmath,amssymb,amsfonts,latexsym,graphicx}
+\usepackage[spanish, mexico]{babel}
+\usepackage[latin1]{inputenc}
+%%% ========================================================================
+
+%%% ========================================================================
+\usepackage{geometry}
+\setlength{\topmargin}{-5em} %
+\setlength{\headsep}{15pt} %
+\setlength{\footskip}{25pt} %
+\setlength{\textheight}{9.75in} %
+\setlength{\textwidth}{6.5in} %
+\setlength{\hoffset}{-15pt}
+\setlength{\parskip}{1ex}
+%%% ========================================================================
+
+% ========================================================================
+\usepackage{fancyhdr} 
+\pagestyle{fancy} 
+\renewcommand\headrulewidth{.1pt} 
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily \doctitle \hfill \topictitle \hfill \thepage} 
+\renewcommand\footrulewidth{.1pt} 
+\fancyfoot[c]{} 
+\fancyfoot[R]{\footnotesize\sffamily \theauthor \hfill \course \hfill \period}
+
+\def\doctitle{Control 1}
+\def\theauthor{E. Barrios}
+\def\period{\today}
+\def\topictitle{\textbf{Aproximaciones}}
+\def\course{\textsc{Estadística Matemática}}
+%%% ========================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+\begin{itemize}
+\renewcommand{\baselinestretch}{1}\normalsize
+\item {\bf Fecha máxima de entrega:} Miércoles 16 de febrero @ 16:00 h
+\end{itemize}\vspace{-1em}
+\rule{\linewidth}{.1pt}
+\renewcommand{\baselinestretch}{1.1}\normalsize
+\setlength{\parskip}{1ex} 
+%-------------------------------------------------------------------------------
+
+\textbf{Determinístico}
+
+\begin{enumerate}
+\item[I)] Calcule $n!$; la correspondiente aproximación de Stirling
+$\big(S(n)\big)=n!\approx\sqrt{2\pi n}n^ne^{-n}$; la diferencia entre ellas $\big(D(n)=n!-S(n)\big)$; y la diferencia relativa $\big(DR(n)=D(n)/n!\big)$ para $n=1,2,\dots,12$.
+\end{enumerate}
+
+\begin{table}[h!tb]
+	\caption{\label{tab:approxError} Error de aproximación $D(n)$ de la aproximación de \emph{Stirling} $S(n)$ al factorial $n!$.} 
+	
+	\medskip
+	
+\centering 
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$n$ & $n!$ & $S(n)$ & $D(n)$ & $D(n)/n!$ \\
+\hline\hline
+ 1 & & & & \\
+2 & & & & \\
+3 & & & & \\
+4 & & & & \\
+5 & & & & \\
+6 & & & & \\
+7 & & & & \\
+8 & & & & \\
+9 & & & & \\
+10 & & & & \\
+11 & & & & \\
+12 & & & & \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\textbf{Simulación}
+Sea $X$ una variable aleatoria (v.a.) definida sobre un espacio de probabilidad $(\Omega,\mathbb{S},\Pr)$. Para $w\in\Omega$, $X(w)=x\in\mathbb{R}$ se dice una \emph{realización} de la variable $X$. Si uno construye un \emph{histograma} para \emph{muchas} realizaciones $x$, el diagrama describe la distribución de $X$ aproximando $f$, la función de densidad de probabilidad (f.d.p.) de $X$. Mientras mayor sea el número de realizaciones de $X$ mejor será la aproximación.
+
+
+Considere la v.a. $X$ con f.d.p. $f$. Simule $N$ realizaciones de la variable y construya el correspondiente histograma.  Por ejemplo, para el caso de $X\sim\text{Gamma}(\alpha=2,\beta=1)$ con $N=20,000$ realizaciones, el código usando \textsf{R} sería el siguiente y da lugar a la Figura \ref{fig:histGamma}.
+\begin{verbatim}
+	set.seed(20220118)
+	N <- 20000
+	x <- rgamma(N,shape=2,scale=1)
+	out <- hist(x, xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+\end{verbatim}
+
+\begin{figure}[h!tb]
+	\centerline{\includegraphics[width=3.0in]{./histGamma}} %
+	\caption{\label{fig:histGamma} Histograma de 20000 realizaciones de una
+		distribución gamma de parámetros $\alpha=2$ y $\beta=1$.}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

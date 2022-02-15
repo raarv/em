@@ -1,6 +1,6 @@
 ---
 title: "Control 1"
-author: 
+author:
 - Fernando Rodriguez Guevara
 - Rafael Arredondo
 date: "16/2/2022"
@@ -21,7 +21,7 @@ f <- factorial(n)
 stirling <- function(x) (2 * pi * n)^0.5 * (n / exp(1)) ^n
 s <- stirling(n)
 d <- f -s
-dr <- d / f 
+dr <- d / f
 data.frame(n, f, s, d, dr)
 ```
 
@@ -31,6 +31,15 @@ data.frame(n, f, s, d, dr)
 set.seed(20220118)
 N <- 20000
 x <- rgamma(N,shape=2,scale=1)
-out <- hist(x, xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+b <- seq(from=0, to=14, by=0.5)
+out <- hist(x, breaks = b, xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+p_n <- out$density[5]-out$density[6]
+p <- pgamma(2.5,2,1) - pgamma(2,2,1)
+epsilon = p_n - p
 ```
 
+## 3
+
+```{r pressure, echo=TRUE}
+
+```

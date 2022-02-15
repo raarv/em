@@ -1,0 +1,36 @@
+---
+title: "Control 1"
+author: 
+- Fernando Rodriguez Guevara
+- Rafael Arredondo
+date: "16/2/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1
+Calcule $n!$, la correspondiente aproximación de Stirling, la difernecia entre estas y la diferencia relativa para $n = 1, 2, ..., 12$.
+
+
+```{r pressure, echo=TRUE}
+n <- 1 : 12
+f <- factorial(n)
+stirling <- function(x) (2 * pi * n)^0.5 * (n / exp(1)) ^n
+s <- stirling(n)
+d <- f -s
+dr <- d / f 
+data.frame(n, f, s, d, dr)
+```
+
+## 2
+
+```{r pressure, echo=TRUE}
+set.seed(20220118)
+N <- 20000
+x <- rgamma(N,shape=2,scale=1)
+out <- hist(x, xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+```
+

@@ -41,5 +41,33 @@ epsilon = p_n - p
 ## 3
 
 ```{r pressure, echo=TRUE}
+set.seed(20220118)
+simulaciones <- 20000
 
+t_muestra <- 30
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/n)
+hist(z)
+
+t_muestra <- 100
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/n)
+hist(z)
+
+t_muestra <- 500
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/n)
+hist(z)
 ```

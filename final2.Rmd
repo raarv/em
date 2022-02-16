@@ -1,0 +1,677 @@
+---
+title: "Control 1"
+author:
+- Fernando Rodriguez Guevara
+- Rafael Arredondo
+date: "16/02/2022"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## 1
+Calcule $n!$, la correspondiente aproximación de Stirling, la difernecia entre estas y la diferencia relativa para $n = 1, 2, ..., 12$.
+```{r}
+n <- 1 : 12
+f <- factorial(n)
+stirling <- function(x) (2 * pi * n)^0.5 * (n / exp(1)) ^n
+s <- stirling(n)
+d <- f -s
+dr <- d / f
+library(knitr)
+kable(data.frame(n, "Factorial" = f, "Aproximación de Stirling" = s,
+                 "Diferencia" = d, "Diferencia relativa" = dr))
+```
+\newpage
+## 2
+```{r}
+col2rgb(c("lightblue", "lightgreen", "pink"))
+set.seed(20220118)
+simulaciones <- 20000
+x <- rgamma(simulaciones, shape=2, scale=1)
+b <- seq(from=0, to=14, by=0.5)
+out <- hist(x, breaks = b, xlab="observaciones", ylab="frecuencia", main="Distribución Gamma", col = "lightblue")
+p_n <- out$density[5]-out$density[6]
+p <- pgamma(2.5,2,1) - pgamma(2,2,1)
+epsilon = p_n - p
+```
+\newpage
+## 3
+## Distribucion Binomial p = 0.5
+```{r}
+param <- c(0.5, 0.7, 0.9)
+t_muestra <- 30
+m_binom <- rbinom(simulaciones,25,param[1])
+media <- 25 * param[1]
+varianza <- 25 * param[1] * (1 - param[1])
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Binomial")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Binomial")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Binomial")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Distribucion Binomial p = 0.7
+```{r}
+t_muestra <- 30
+m_binom <- rbinom(simulaciones,25,param[2])
+media <- 25 * param[2]
+varianza <- 25 * param[2] * (1 - param[2])
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Binomial")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Binomial")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Binomial")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Distribucion Binomial p = 0.9
+```{r}
+t_muestra <- 30
+m_binom <- rbinom(simulaciones,25,param[3])
+media <- 25 * param[3]
+varianza <- 25 * param[3] * (1 - param[3])
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Binomial")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Binomial")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Binomial")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Poisson media 1
+```{r}
+set.seed(20220118)
+simulaciones <- 20000
+param <- c(1, 4, 8)
+
+t_muestra <- 30
+lambda <-  param[1]
+m_pois <- rpois(simulaciones, lambda)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_pois, t_muestra, replace = TRUE))}
+z <- (muestra - lambda) / sqrt(lambda / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Poisson")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_pois, t_muestra, replace = TRUE))}
+z <- (muestra - lambda) / sqrt(lambda / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Poisson")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_pois, t_muestra, replace = TRUE))}
+z <- (muestra - lambda) / sqrt(lambda/t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Poisson")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Poisson media 4
+```{r}
+t_muestra <- 30
+lambda <-  param[2]
+m_pois <- rpois(simulaciones, lambda)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_pois, t_muestra, replace = TRUE))}
+z <- (muestra - lambda) / sqrt(lambda / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Poisson")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_pois, t_muestra, replace = TRUE))}
+z <- (muestra - lambda) / sqrt(lambda / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Poisson")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_pois, t_muestra, replace = TRUE))}
+z <- (muestra - lambda) / sqrt(lambda/t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Poisson")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Poisson media 8
+```{r}
+t_muestra <- 30
+lambda <-  param[3]
+m_pois <- rpois(simulaciones, lambda)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_pois, t_muestra, replace = TRUE))}
+z <- (muestra - lambda) / sqrt(lambda / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Poisson")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_pois, t_muestra, replace = TRUE))}
+z <- (muestra - lambda) / sqrt(lambda / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Poisson")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_pois, t_muestra, replace = TRUE))}
+z <- (muestra - lambda) / sqrt(lambda/t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Poisson")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Distribucion Normal. Media 2, varianza 4
+```{r}
+t_muestra <- 30
+m_norm <- rnorm(simulaciones,2,2)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_norm, t_muestra, replace = TRUE))}
+z <- (muestra - 2) / sqrt( 4 / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Normal")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_norm, t_muestra, replace = TRUE))}
+z <- (muestra - 2) / sqrt( 4 / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Normal")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_norm, t_muestra, replace = TRUE))
+}
+z <- (muestra - 2) / sqrt( 4 / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Normal")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Distribucion Gamma (1,3)
+
+```{r}
+alfa <- c(1, 3, 5)
+beta <- c(3, 1, 5)
+```
+
+```{r}
+t_muestra <- 30
+m_gamma <- rgamma(simulaciones, shape= alfa[1], scale = beta[1])
+media <- alfa[1] * beta[1]
+varianza <- alfa[1] * (beta[1])^2
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Distribucion Gamma (3,1)
+
+```{r}
+t_muestra <- 30
+m_gamma <- rgamma(simulaciones, shape= alfa[2], scale = beta[2])
+media <- alfa[2] * beta[2]
+varianza <- alfa[2] * (beta[2])^2
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Distribucion Gamma (5,5)
+
+```{r}
+t_muestra <- 30
+m_gamma <- rgamma(simulaciones, shape= alfa[3], scale = beta[3])
+media <- alfa[3] * beta[3]
+varianza <- alfa[3] * (beta[3])^2
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+
+\newpage
+
+## Distribucion Beta (1,1)
+
+```{r}
+theta1 <- c(1, 1/2, 3, 1/2)
+theta2 <- c(1, 2, 1/3, 1/2)
+```
+
+```{r}
+t_muestra <- 30
+m_beta <- rbeta(simulaciones, shape1 = theta1[1], shape2 = theta2[1])
+media <- theta1[1] / ( theta1[1] + theta2[1])
+varianza <- (theta1[1] * theta2[1]) / ( (theta1[1] + theta2[1])^2 * ( theta1[1] + theta2[1] + 1) )
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Distribucion Beta (1/2, 2)
+
+```{r}
+t_muestra <- 30
+m_beta <- rbeta(simulaciones, shape1 = theta1[2], shape2 = theta2[2])
+media <- theta1[2] / ( theta1[2] + theta2[2])
+varianza <- (theta1[2] * theta2[2]) / ( (theta1[2] + theta2[2])^2 * ( theta1[2] + theta2[2] + 1) )
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+## Distribucion Beta (3, 1/3)
+
+```{r}
+t_muestra <- 30
+m_beta <- rbeta(simulaciones, shape1 = theta1[3], shape2 = theta2[3])
+media <- theta1[3] / ( theta1[3] + theta2[3])
+varianza <- (theta1[3] * theta2[3]) / ( (theta1[3] + theta2[3])^2 * ( theta1[3] + theta2[3] + 1) )
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "pink", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+```
+\newpage
+
+
+## Distribucion Beta (1/2, 1/2)
+
+```{r}
+t_muestra <- 30
+m_beta <- rbeta(simulaciones, shape1 = theta1[4], shape2 = theta2[4])
+media <- theta1[4] / ( theta1[4] + theta2[4])
+varianza <- (theta1[4] * theta2[4]) / ( (theta1[4] + theta2[4])^2 * ( theta1[4] + theta2[4] + 1) )
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+
+```{r}
+t_muestra <- 100
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage
+```{r}
+t_muestra <- 500
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_beta, t_muestra, replace = TRUE))}
+z <- (muestra - media) / sqrt(varianza / t_muestra)
+out1 <- hist(z, plot = FALSE)
+plot(out1, col = "lightblue", xlab="observaciones", ylab="frecuencia", main="Distribución Beta")
+acum <- 0
+for (i in 1 : length(out1$counts)) {
+	acum <- acum + abs((out1$counts[i]/sum(out1$counts)) - (pnorm(out1$breaks[i+1])-pnorm(out1$breaks[i])))
+```
+\newpage

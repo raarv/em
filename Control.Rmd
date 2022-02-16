@@ -40,9 +40,12 @@ epsilon = p_n - p
 
 ## 3
 
+## Binom
+
 ```{r pressure, echo=TRUE}
 set.seed(20220118)
 simulaciones <- 20000
+param <- c(.5, .7, .9)
 
 t_muestra <- 30
 m_gamma <- rgamma(simulaciones,shape=1,scale=3)
@@ -50,7 +53,7 @@ muestra <- c()
 for ( i in 1 : simulaciones ) {
   muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
 }
-z <- (muestra - 3) / sqrt(9/n)
+z <- (muestra - 3) / sqrt(9/t_muestra)
 hist(z)
 
 t_muestra <- 100
@@ -59,7 +62,7 @@ muestra <- c()
 for ( i in 1 : simulaciones ) {
   muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
 }
-z <- (muestra - 3) / sqrt(9/n)
+z <- (muestra - 3) / sqrt(9/t_muestra)
 hist(z)
 
 t_muestra <- 500
@@ -68,6 +71,144 @@ muestra <- c()
 for ( i in 1 : simulaciones ) {
   muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
 }
-z <- (muestra - 3) / sqrt(9/n)
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+```
+## Pois
+
+```{r pressure, echo=TRUE}
+set.seed(20220118)
+simulaciones <- 20000
+param <- c(1, 4, 8)
+
+t_muestra <- 30
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+
+t_muestra <- 100
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+
+t_muestra <- 500
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+```
+## Norm
+
+```{r pressure, echo=TRUE}
+set.seed(20220118)
+simulaciones <- 20000
+
+t_muestra <- 30
+m_binom <- rbinom(simulaciones,25,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+
+t_muestra <- 100
+m_binom <- rbinom(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+
+t_muestra <- 500
+m_binom <- rbinom(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_binom, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+```
+
+## Gamma
+
+```{r pressure, echo=TRUE}
+set.seed(20220118)
+simulaciones <- 20000
+alfa <- c(1, 3, 5)
+beta <- c(3, 1, 5)
+
+t_muestra <- 30
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+
+t_muestra <- 100
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+
+t_muestra <- 500
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+```
+## Beta
+
+```{r pressure, echo=TRUE}
+set.seed(20220118)
+simulaciones <- 20000
+theta1 <- c(1, 1/2, 3, 1/2)
+theta2 <- c(1, 2, 1/3, 1/2)
+
+t_muestra <- 30
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+
+t_muestra <- 100
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
+hist(z)
+
+t_muestra <- 500
+m_gamma <- rgamma(simulaciones,shape=1,scale=3)
+muestra <- c()
+for ( i in 1 : simulaciones ) {
+  muestra[i] = mean(sample(m_gamma, t_muestra, replace = TRUE))
+}
+z <- (muestra - 3) / sqrt(9/t_muestra)
 hist(z)
 ```

@@ -20,13 +20,13 @@
 %%% ========================================================================
 
 % ========================================================================
-\usepackage{fancyhdr} 
-\pagestyle{fancy} 
-\renewcommand\headrulewidth{.1pt} 
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand\headrulewidth{.1pt}
 \fancyhf{}
-\fancyhead[L]{\footnotesize\sffamily \doctitle \hfill \topictitle \hfill \thepage} 
-\renewcommand\footrulewidth{.1pt} 
-\fancyfoot[c]{} 
+\fancyhead[L]{\footnotesize\sffamily \doctitle \hfill \topictitle \hfill \thepage}
+\renewcommand\footrulewidth{.1pt}
+\fancyfoot[c]{}
 \fancyfoot[R]{\footnotesize\sffamily \theauthor \hfill \course \hfill \period}
 
 \def\doctitle{Control 1}
@@ -42,15 +42,14 @@
 
 %-------------------------------------------------------------------------------
 \begin{itemize}
-\renewcommand{\baselinestretch}{1}\normalsize
-\item {\bf Fecha máxima de entrega:} Miércoles 16 de febrero @ 16:00 h
+
+\item {Rafael Arredondo Villa}
+\item {Fernando Rodriguez Guevara}
 \end{itemize}\vspace{-1em}
 \rule{\linewidth}{.1pt}
 \renewcommand{\baselinestretch}{1.1}\normalsize
-\setlength{\parskip}{1ex} 
+\setlength{\parskip}{1ex}
 %-------------------------------------------------------------------------------
-
-\textbf{Determinístico}
 
 \begin{enumerate}
 \item[I)] Calcule $n!$; la correspondiente aproximación de Stirling
@@ -58,50 +57,60 @@ $\big(S(n)\big)=n!\approx\sqrt{2\pi n}n^ne^{-n}$; la diferencia entre ellas $\bi
 \end{enumerate}
 
 \begin{table}[h!tb]
-	\caption{\label{tab:approxError} Error de aproximación $D(n)$ de la aproximación de \emph{Stirling} $S(n)$ al factorial $n!$.} 
-	
+	\caption{\label{tab:approxError} Error de aproximación $D(n)$ de la aproximación de \emph{Stirling} $S(n)$ al factorial $n!$.}
+
 	\medskip
-	
-\centering 
+
+\centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-$n$ & $n!$ & $S(n)$ & $D(n)$ & $D(n)/n!$ \\
-\hline\hline
- 1 & & & & \\
-2 & & & & \\
-3 & & & & \\
-4 & & & & \\
-5 & & & & \\
-6 & & & & \\
-7 & & & & \\
-8 & & & & \\
-9 & & & & \\
-10 & & & & \\
-11 & & & & \\
-12 & & & & \\
-\hline
+   & $n!$      & $S(n)$       & $D(n)$       & $D(n)/n!$ \\ \hline
+1  & 1         & 9.221370e-01 & 7.786300e-02 & 0.0778630 \\
+2  & 2         & 1.919004e+00 & 8.099560e-02 & 0.0404978 \\
+3  & 6         & 5.836210e+00 & 1.637904e-01 & 0.0272984 \\
+4  & 24        & 2.350618e+01 & 4.938249e-01 & 0.0205760 \\
+5  & 20        & 1.180192e+02 & 1.980832e+00 & 0.0165069 \\
+6  & 720       & 7.100782e+02 & 9.921815e+00 & 0.0137803 \\
+7  & 5040      & 4.980396e+03 & 5.960417e+01 & 0.0118262 \\
+8  & 40320     & 3.990240e+04 & 4.176045e+02 & 0.0103573 \\
+9  & 362880    & 3.595369e+05 & 3.343127e+03 & 0.0092128 \\
+10 & 3628800   & 3.598696e+06 & 3.010438e+04 & 0.0082960 \\
+11 & 39916800  & 3.961563e+07 & 3.011749e+05 & 0.0075451 \\
+12 & 479001600 & 4.756875e+08 & 3.314114e+06 & 0.0069188 \\ \hline
 \end{tabular}
 \end{table}
 
 
-\textbf{Simulación}
-Sea $X$ una variable aleatoria (v.a.) definida sobre un espacio de probabilidad $(\Omega,\mathbb{S},\Pr)$. Para $w\in\Omega$, $X(w)=x\in\mathbb{R}$ se dice una \emph{realización} de la variable $X$. Si uno construye un \emph{histograma} para \emph{muchas} realizaciones $x$, el diagrama describe la distribución de $X$ aproximando $f$, la función de densidad de probabilidad (f.d.p.) de $X$. Mientras mayor sea el número de realizaciones de $X$ mejor será la aproximación.
+\begin{enumerate}
+\item[III)] Calcule los errores de aproximación de la distribución normal a la distribución del promedio para
+tamaños de muestra n = 30, 100, 500, para las distintas leyes de probabilidad indicadas en la tabla 2.
+\end{enumerate}
 
+\begin{table}[h!tb]
+	\caption{\label{tab:approxError} Error de aproximación de la distribución normal a la del promedio de muestras tamaño n para distintas distribuciones.}
 
-Considere la v.a. $X$ con f.d.p. $f$. Simule $N$ realizaciones de la variable y construya el correspondiente histograma.  Por ejemplo, para el caso de $X\sim\text{Gamma}(\alpha=2,\beta=1)$ con $N=20,000$ realizaciones, el código usando \textsf{R} sería el siguiente y da lugar a la Figura \ref{fig:histGamma}.
-\begin{verbatim}
-	set.seed(20220118)
-	N <- 20000
-	x <- rgamma(N,shape=2,scale=1)
-	out <- hist(x, xlab="observaciones", ylab="frecuencia", main="Distribución Gamma")
-\end{verbatim}
+	\medskip
 
-\begin{figure}[h!tb]
-	\centerline{\includegraphics[width=3.0in]{./histGamma}} %
-	\caption{\label{fig:histGamma} Histograma de 20000 realizaciones de una
-		distribución gamma de parámetros $\alpha=2$ y $\beta=1$.}
-\end{figure}
-
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$distribución$                                                  & $parámetros$                                                           & $n = 30$    & $n = 100$  & $n = 500$  \\ \hline
+Binomial                                                        & p = 0.5                                                                & .06421342   & 0.09244345 & 0.2667152  \\ \hline
+Bin(25,p)                                                       & p = 0.7                                                                & 0.05650117  & 0.02914352 & 0.04866444 \\
+                                                                & p = 0.9                                                                & 0.07182747  & 0.06686821 & 0.03044123 \\ \hline
+Poisson                                                         & \lambda = 1                                             & 0.1566382   & 0.07402676 & 0.06627173 \\
+Po(\lambda)                                      & \lambda = 4                                             & 0.1009734   & 0.01775369 & 0.05841158 \\
+                                                                & \lambda = 8                                             & 0.05624036  & 0.04897173 & 0.1104501  \\ \hline
+Normal                                                          & \mu = 2, \sigma² = 4                     & 0.01879754  & 0.02039017 & 0.03169079 \\ \hline
+Gamma                                                           & \alpha = 1, \beta = 3                    & 0.09236766  & 0.07579904 & 0.08748673 \\
+Ga(\alpha,\beta)                  & \alpha = 3, \beta = 1                    & 0.04308491  & 0.04777173 & 0.1347708  \\
+                                                                & \alpha = 5, \beta = 5                    & 0.02959665  & 0.01707562 & 0.06010626 \\ \hline
+Beta                                                            & \theta_{1} = 1, \theta_{2} = 1     & 0.009798973 & 0.02123416 & 0.03062727 \\
+Beta(\theta_{1},\theta_{2}) & \theta_{1} = 1/2, \theta_{2} = 2   & 0.07246766  & 0.05977173 & 0.07699944 \\
+                                                                & \theta_{1} = 3, \theta_{2} = 1/3   & 0.0872818   & 0.05304345 & 0.03355759 \\
+                                                                & \theta_{1} = 1/2, \theta_{2} = 1/2 & 0.0308      & 0.05709665 & 0.1380969  \\ \hline
+\end{tabular}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
